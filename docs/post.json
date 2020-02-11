@@ -1,0 +1,18 @@
+{
+    "id":"<some guid>",
+    "img_url":"<some url>",
+    "body":"some text reeeee",
+    "likes": 123,
+    "comments": [
+        {
+            "id":"<some guid>",
+            "user_id":"<some guid>",
+            "user_name":"billy bob",
+            "content":"more text reeeee",
+            "likes": 123
+        },
+        {
+            "..."
+        }
+    ]
+}
