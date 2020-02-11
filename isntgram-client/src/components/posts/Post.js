@@ -19,7 +19,7 @@ function Post(props) {
         m="auto"
         my={4}
       >
-        <Image rounded="md" src={props.img_url}/>
+        <Image rounded="md" src={props.post.img_url}/>
         <Flex align="baseline" mt={2}>
           <Badge variantColor="brand">Hot</Badge>
           <Text
@@ -29,11 +29,11 @@ function Post(props) {
             fontWeight="bold"
             color="brand.800"
           >
-            {props.created}
+            {props.post.created}
           </Text>
         </Flex>
         <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
-          {props.body}
+          {props.post.body}
         </Text>
         <Text mt={2}>{props.user_id}</Text>
         <Flex mt={2} align="center">

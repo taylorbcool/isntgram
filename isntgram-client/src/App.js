@@ -14,13 +14,15 @@ const axiosUser = axios.create({
 })
 
 const axiosPost = axios.create({
-  baseURL: 'http://73.98.63.133:5000/Post',
+  baseURL: 'http://73.98.63.133:5000/Post/',
   headers: {'Access-Control-Allow-Origin': '*'}
 })
 
 function App() {
   const userId = '0728a190-c8ca-4da9-ba6f-e69dc2380acc'
   const [user, setUser] = useState({})
+  const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     axiosUser.get(`${userId}`)
@@ -32,13 +34,23 @@ function App() {
       .catch(err => {
         console.log(err)
       })
+    axiosPost.get()
+      .then(res => {
+        console.log(res.data)
+        setPosts([...posts, ...res.data])
+        console.log(posts)
+        setIsLoading(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
 
   return (
     <ThemeProvider theme={customTheme}>
       <CSSReset />
       <Dashboard user={user} />
-      <PostList axiosPost={axiosPost} />
+      <PostList posts={posts} isLoading={isLoading} />
     </ThemeProvider>
   );
 }
