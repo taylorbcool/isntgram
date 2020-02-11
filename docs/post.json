@@ -1,13 +1,16 @@
 {
     "id":"<some guid>",
+    "user_id":"<some guid>",
+    "username":"billy bob",
     "img_url":"<some url>",
     "body":"some text reeeee",
+    "created":"2020-01-01t00:00:00",
     "likes": 123,
     "comments": [
         {
             "id":"<some guid>",
             "user_id":"<some guid>",
-            "user_name":"billy bob",
+            "username":"billy bob",
             "content":"more text reeeee",
             "likes": 123
         },
