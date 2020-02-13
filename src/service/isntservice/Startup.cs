@@ -34,6 +34,7 @@ namespace isntservice
             services.AddSingleton<UserService>();
             services.AddSingleton<PostService>();
             services.AddSingleton<PostLikeService>();
+            services.AddSingleton<CommentService>();
             services.AddCors();
         }
 
