@@ -1,56 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from 'react-router-dom';
 import {
   ThemeProvider,
-  CSSReset,
-  Box,
-  Image,
-  Flex,
-  Badge,
-  Text
-} from "@chakra-ui/core";
-import { FaHeart } from "react-icons/fa";
+  CSSReset
+} from '@chakra-ui/core';
 import { customTheme } from "./theme";
+import PostList from "./components/posts/PostList";
+import Dashboard from './components/Dashboard.js';
+import UserContext from './contexts/UserContext';
+import PostContext from "./contexts/PostContext";
+import LoadingContext from "./contexts/LoadingContext";
+import axiosWithAuth from "./auth/axiosWithAuth";
+import NavMenu from "./components/NavMenu";
 
 function App() {
+  const [user, setUser] = useState({})
+  const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState([])
+
+  // useEffect(() => {
+  //   axiosWithAuth.get(`/users/${user.id}`)
+  //     .then(res => {
+  //       // console.log(`getting user with id of ${userId}`)
+  //       // console.log(res)
+  //       setUser(res.data)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
+
   return (
     <ThemeProvider theme={customTheme}>
-      <CSSReset />
-
-      <Box
-        maxWidth={400}
-        p={4}
-        borderRadius={4}
-        borderWidth={2}
-        borderStyle="solid"
-        m="auto"
-        my={4}
-      >
-        <Image rounded="md" src="https://bit.ly/2k1H1t6" />
-        <Flex align="baseline" mt={2}>
-          <Badge variantColor="brand">Hot</Badge>
-          <Text
-            ml={2}
-            textTransform="uppercase"
-            fontSize="sm"
-            fontWeight="bold"
-            color="brand.800"
-          >
-            Posted @ DateTime
-          </Text>
-        </Flex>
-        {/* <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
-          Modern, Chic Penthouse with Mountain, City & Sea Views
-        </Text> */}
-        <Text mt={2}>username</Text>
-        <Flex mt={2} align="center">
-          <Box as={FaHeart} color="orange.400" />
-          <Text ml={1} fontsize="sm">
-            <b>484</b> (190)
-          </Text>
-        </Flex>
-      </Box>
-
-      <Text textAlign="center">UI Example</Text>
+        <CSSReset />
+      <LoadingContext.Provider value={{isLoading, setIsLoading}} >
+        <PostContext.Provider value={{posts, setPosts}}>
+          <UserContext.Provider value={{user, setUser}} >
+            <NavMenu />
+            <Switch>
+              <Route exact path='/' component={PostList} />
+              <Route path={`/account/${user.id}`} component={Dashboard} />
+            </Switch>
+          </UserContext.Provider>
+        </PostContext.Provider>
+      </LoadingContext.Provider>
     </ThemeProvider>
   );
 }
