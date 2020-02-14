@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 import {
   ThemeProvider,
   CSSReset
@@ -7,50 +7,43 @@ import {
 import { customTheme } from "./theme";
 import PostList from "./components/posts/PostList";
 import Dashboard from './components/Dashboard.js';
-
-const axiosUser = axios.create({
-  baseURL: 'http://73.98.63.133:5000/User/',
-  headers: {'Access-Control-Allow-Origin': '*'}
-})
-
-const axiosPost = axios.create({
-  baseURL: 'http://73.98.63.133:5000/Post/',
-  headers: {'Access-Control-Allow-Origin': '*'}
-})
+import UserContext from './contexts/UserContext';
+import PostContext from "./contexts/PostContext";
+import LoadingContext from "./contexts/LoadingContext";
+import axiosWithAuth from "./auth/axiosWithAuth";
+import NavMenu from "./components/NavMenu";
 
 function App() {
-  const userId = '0728a190-c8ca-4da9-ba6f-e69dc2380acc'
   const [user, setUser] = useState({})
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([])
 
-  useEffect(() => {
-    axiosUser.get(`${userId}`)
-      .then(res => {
-        // console.log(`getting user with id of ${userId}`)
-        // console.log(res)
-        setUser(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    axiosPost.get()
-      .then(res => {
-        console.log(res.data)
-        setPosts([...posts, ...res.data])
-        console.log(posts)
-        setIsLoading(false)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axiosWithAuth.get(`/users/${user.id}`)
+  //     .then(res => {
+  //       // console.log(`getting user with id of ${userId}`)
+  //       // console.log(res)
+  //       setUser(res.data)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
 
   return (
     <ThemeProvider theme={customTheme}>
-      <CSSReset />
-      <Dashboard user={user} />
-      <PostList posts={posts} isLoading={isLoading} />
+        <CSSReset />
+      <LoadingContext.Provider value={{isLoading, setIsLoading}} >
+        <PostContext.Provider value={{posts, setPosts}}>
+          <UserContext.Provider value={{user, setUser}} >
+            <NavMenu />
+            <Switch>
+              <Route exact path='/' component={PostList} />
+              <Route path={`/account/${user.id}`} component={Dashboard} />
+            </Switch>
+          </UserContext.Provider>
+        </PostContext.Provider>
+      </LoadingContext.Provider>
     </ThemeProvider>
   );
 }

@@ -32,6 +32,7 @@ function Post(props) {
             {props.post.created}
           </Text>
         </Flex>
+        <Text mt={2} fontSize="l">{props.post.user_name}</Text>
         <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
           {props.post.body}
         </Text>
@@ -39,7 +40,7 @@ function Post(props) {
         <Flex mt={2} align="center">
           <Box as={FaHeart} color="orange.400" />
           <Text ml={1} fontsize="sm">
-            <b>420</b>
+            <b>{props.post.likes}</b>
           </Text>
         </Flex>
       </Box>
