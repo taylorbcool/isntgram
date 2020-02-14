@@ -27,6 +27,10 @@ namespace isntservice.Services {
             return DummyPostLikes.Where(p => p.PostId == id).ToList();
         }
 
-
+        public PostLikeModel Create(PostLikeModel postLike){
+            postLike.Id = Guid.NewGuid();
+            DummyPostLikes.Add(postLike);
+            return postLike;
+        }
     }
 }

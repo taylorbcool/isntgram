@@ -40,7 +40,8 @@ namespace isntservice.Services {
                 Id = Guid.NewGuid(),
                 PostId = Guid.Parse(RandSelector(PostList)),
                 UserId = Guid.Parse(RandSelector(UserList)),
-                Content = RandSelector(CommentList)
+                Content = RandSelector(CommentList),
+                Created = DateTime.UtcNow
             };
         }
 
@@ -56,6 +57,13 @@ namespace isntservice.Services {
 
         public CommentModel Get(Guid id){
             return DummyComments.SingleOrDefault(c => c.Id == id);
+        }
+
+        public CommentModel Create(CommentModel newComment){
+            newComment.Id = Guid.NewGuid();
+            newComment.Created = DateTime.UtcNow;
+            DummyComments.Add(newComment);
+            return newComment;
         }
     }
 }

@@ -9,5 +9,6 @@ namespace isntservice.Models {
         [JsonPropertyName("user_id")]
         public Guid UserId {get;set;}
         public string Content {get;set;}
+        public DateTime Created {get;set;}
     }
 }

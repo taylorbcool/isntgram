@@ -31,5 +31,24 @@ namespace isntservice.Services {
         public PostModel Get(Guid id){
             return DummyPosts.SingleOrDefault(p => p.Id == id);
         }
+
+        public PostModel Create(PostModel newPost){
+            newPost.Id = Guid.NewGuid();
+            newPost.Created = DateTime.UtcNow;
+            DummyPosts.Add(newPost);
+            return newPost;
+        }
+
+        public PostModel Update(Guid postId, PostModel updatedPost){
+            DummyPosts.Remove(DummyPosts.FirstOrDefault(p => p.Id == postId));
+            updatedPost.Id = postId;
+            DummyPosts.Add(updatedPost);
+            return updatedPost;
+        }
+
+        public Guid Delete(Guid postId){
+            DummyPosts.Remove(DummyPosts.FirstOrDefault(p => p.Id == postId));
+            return postId;
+        }
     }
 }
