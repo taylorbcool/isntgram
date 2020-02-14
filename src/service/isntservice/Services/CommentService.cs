@@ -59,6 +59,10 @@ namespace isntservice.Services {
             return DummyComments.SingleOrDefault(c => c.Id == id);
         }
 
+        public List<CommentModel> GetByPostId(Guid postId){
+            return DummyComments.Where(c => c.PostId == postId).ToList();
+        }
+
         public CommentModel Create(CommentModel newComment){
             newComment.Id = Guid.NewGuid();
             newComment.Created = DateTime.UtcNow;
