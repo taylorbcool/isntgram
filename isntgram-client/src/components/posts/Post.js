@@ -7,6 +7,7 @@ import {
   Text
 } from "@chakra-ui/core";
 import { FaHeart } from "react-icons/fa";
+import CommentList from '../comments/CommentList'
 
 function Post(props) {
   return (
@@ -36,13 +37,13 @@ function Post(props) {
         <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
           {props.post.body}
         </Text>
-        <Text mt={2}>{props.user_id}</Text>
         <Flex mt={2} align="center">
           <Box as={FaHeart} color="orange.400" />
           <Text ml={1} fontsize="sm">
             <b>{props.post.likes}</b>
           </Text>
         </Flex>
+        <CommentList comments={props.post.comments} />
       </Box>
   );
 }

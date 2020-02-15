@@ -9,7 +9,8 @@ import {
   DrawerCloseButton,
   Button,
   Input,
-  useDisclosure
+  useDisclosure,
+  ButtonGroup
 } from "@chakra-ui/core";
 
 function NavMenu() {
@@ -29,18 +30,24 @@ function NavMenu() {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Check out this menu!</DrawerHeader>
+          <DrawerHeader>
+            <Button>Feed</Button>
+            <Button>Account</Button>
+            <Button>Log Out</Button>
+          </DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            <Button>Sports</Button>
+            <Button>Beauty</Button>
+            <Button>Music</Button>
+            <Button>Photography</Button>
+            <Button>Art</Button>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button color="blue">Save</Button>
+            <Input placeholder="Find your interests" />
+            <Button>Search</Button>
+            {/* <Button>Cancel</Button> */}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
