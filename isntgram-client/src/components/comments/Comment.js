@@ -8,16 +8,16 @@ const Comment = props => {
       <Text
         ml={2}
         textTransform="uppercase"
-        fontSize="sm"
+        fontSize="md"
         fontWeight="bold"
         color="brand.800"
       >
-        {props.comment.created}
+        {props.comment.userName}
       </Text>
     </Flex>
-  <Text mt={2} fontSize="l">{props.comment.user_name}</Text>
-  <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
-    {props.comment.body}
+  {/* <Text mt={2} fontSize="l">{props.comment.userName}</Text> */}
+  <Text mt={2} fontSize="l" fontWeight="semibold" lineHeight="short">
+    {props.comment.content}
   </Text>
   </>
   )}

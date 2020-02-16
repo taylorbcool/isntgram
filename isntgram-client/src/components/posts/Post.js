@@ -23,7 +23,7 @@ function Post(props) {
         <Image rounded="md" src={props.post.img_url}/>
         <Flex align="baseline" mt={2}>
           <Badge variantColor="brand">Hot</Badge>
-          <Text
+          {/* <Text
             ml={2}
             textTransform="uppercase"
             fontSize="sm"
@@ -31,10 +31,12 @@ function Post(props) {
             color="brand.800"
           >
             {props.post.created}
-          </Text>
+          </Text> */}
         </Flex>
-        <Text mt={2} fontSize="l">{props.post.user_name}</Text>
-        <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
+        <Text mt={2} fontSize="l" fontWeight="semibold" >
+          {props.post.user_name}
+          </Text>
+        <Text mt={2} fontSize="xl"  lineHeight="short">
           {props.post.body}
         </Text>
         <Flex mt={2} align="center">
