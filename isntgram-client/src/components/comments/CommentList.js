@@ -6,7 +6,6 @@ import Comment from './Comment'
 
 const CommentList = props => {
   return(
-    <>
       <Box
         maxWidth={400}
         p={4}
@@ -17,10 +16,9 @@ const CommentList = props => {
         my={4}
       >
         {props.comments.map(comment => (
-          <Comment comment={comment} />
+          <Comment key={comment.id} comment={comment} />
         ))}
       </Box>
-    </>
   )
 }
 

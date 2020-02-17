@@ -45,7 +45,8 @@ function Post(props) {
             <b>{props.post.likes}</b>
           </Text>
         </Flex>
-        <CommentList comments={props.post.comments} />
+        {!props.post.comments ? console.log('no comments') :
+        <CommentList comments={props.post.comments} />}
       </Box>
   );
 }
