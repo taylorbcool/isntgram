@@ -5,7 +5,7 @@
 var express = require('express');
 var app = express();
 var bp = require('body-parser');
-const { swaggerRouter, getSwagger } = require('./routes/swagger');
+const { swaggerRouter, getSwagger } = require('./routes/swaggerRouter');
 
 // Configure bodyparser
 app.use(bp.urlencoded({extended: true}));
