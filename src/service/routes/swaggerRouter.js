@@ -31,4 +31,4 @@ swaggerRouter.get(
     })
 );
 
-module.exports = {swaggerRouter, getSwagger}
+module.exports = {swaggerRouter}

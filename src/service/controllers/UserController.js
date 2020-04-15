@@ -1,14 +1,15 @@
 // UserController.js
 
-var { User } = require('../services/mongoose');
+var { User } = require('../schemas/UserSchema');
 
 const validateUser = (user) => {
-    if(!user.name) return false;
+    if(!user.username) return false;
     if(!user.bio) return false;
     return true;
 }
 
-const user_list = (req, res, next) => {
+exports.user_list = (req, res, next) => {
+    console.log("user_list called");
     User.find({}, 'username')
         .exec((err, list_users) => {
             if(err) return next(err);
@@ -18,7 +19,7 @@ const user_list = (req, res, next) => {
         });
 };
 
-const user_get = (req, res, next) => {
+exports.user_get = (req, res, next) => {
     User.findById(req.params.id)
         .exec((err, user) => {
             if(err) next(err);
@@ -29,12 +30,12 @@ const user_get = (req, res, next) => {
 }
 
 
-const user_create_post = (req, res, next) => {
+exports.user_create_post = (req, res, next) => {
     var user = new User({
-        name: req.body.name,
+        username: req.body.username,
         bio: req.body.bio
     });
-
+    console.log(user);
     if(!validateUser(user)){
         res.status(400);
         res.json({
@@ -50,5 +51,3 @@ const user_create_post = (req, res, next) => {
         res.json(user);
     }); 
 }
-
-module.exports = { user_list, user_get, user_create_post };
