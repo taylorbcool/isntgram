@@ -2,7 +2,7 @@
 // add router
 
 // BASE SETUP
-require('./services/mongoose');
+require('./services/instantiateMongoose');
 var express = require('express');
 
 var app = express();

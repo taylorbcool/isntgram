@@ -16,9 +16,4 @@ db.once('open', () => {
     console.log('mongodb connected');
 });
 
-// get models ready for export
-var Post = mg.model('Post', postSchema);
-var Comment = mg.model('Comment', commentSchema);
-var User = mg.model('User', userSchema);
-
-module.exports = { mg, Post, Comment, User };
+module.exports = { mg };
