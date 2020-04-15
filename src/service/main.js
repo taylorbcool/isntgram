@@ -5,6 +5,7 @@
 var express = require('express');
 var app = express();
 var bp = require('body-parser');
+const { swaggerRouter, getSwagger } = require('./routes/swagger');
 
 // Configure bodyparser
 app.use(bp.urlencoded({extended: true}));
@@ -23,6 +24,7 @@ app.use('/comment', notImplemented);
 app.use('/post', notImplemented);
 app.use('/postlike', notImplemented);
 app.use('/user', notImplemented);
+app.use('/', swaggerRouter);
 
 app.listen(port);
 console.log("NOW LISTENING ON PORT 8080");
