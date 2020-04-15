@@ -7,6 +7,7 @@ var swaggerRouter = express.Router();
 const options = {
     swaggerDefinition: {
         openapi: "3.0.0",
+        showMutatedRequest: true,
         info: {
             title: "Isnt API",
             version: "1.0.0",
@@ -14,11 +15,12 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:8080/api/v1"
+                url: "http://localhost:8080"
             }
         ]
     },
-    apis: []
+    apis: ['./routes/UserRouter.js'],
+    basePath: '/'
 };
 
 const specs = swaggerJsdoc(options);
@@ -27,7 +29,7 @@ swaggerRouter.use("/",swaggerUi.serve);
 swaggerRouter.get(
     "/",
     swaggerUi.setup(specs, {
-        explorer: true
+
     })
 );
 
