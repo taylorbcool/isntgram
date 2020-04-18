@@ -5,7 +5,6 @@ const { userSchema } = require("./UserSchema");
 const { commentSchema } = require("./CommentSchema");
 
 var postSchema = Schema({
-    _id: Schema.Types.ObjectId,
     author: { type: Schema.Types.ObjectId, ref: 'User'},
     likes: [{ type: Schema.Types.ObjectId, ref: 'User'}],
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment'}],
@@ -13,4 +12,6 @@ var postSchema = Schema({
     body: String
 });
 
-module.exports = { postSchema };
+var Post = mg.model('Post', postSchema);
+
+module.exports = { Post };

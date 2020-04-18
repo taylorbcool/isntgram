@@ -10,6 +10,7 @@ var bp = require('body-parser');
 
 const { swaggerRouter, getSwagger } = require('./routes/swaggerRouter');
 const UserRouter = require('./routes/UserRouter');
+const PostRouter = require('./routes/PostRouter');
 
 // Configure bodyparser
 app.use(bp.urlencoded({extended: true}));
@@ -24,9 +25,9 @@ const notImplemented = async(req, res) => {
 
 // SETUP ENDPOINTS
 app.use('/comment', notImplemented);
-app.use('/post', notImplemented);
 app.use('/postlike', notImplemented);
 app.use('/user', UserRouter);
+app.use('/post', PostRouter);
 app.use('/', swaggerRouter);
 
 app.listen(port);
