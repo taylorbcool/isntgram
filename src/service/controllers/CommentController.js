@@ -30,7 +30,7 @@ exports.save_comment = async (req, res, next) => {
         return res;
     }
 
-    await comment.save((err, comment) => {
+    await comment.save((err) => {
         if(err) return next(err);
         console.log("no errors");
     });

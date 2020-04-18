@@ -30,11 +30,20 @@ exports.post_list = (req, res, next) => {
 
 exports.post_get = (req, res, next) => {
     Post.findById(req.params.id)
-        .populate('author')
-        .populate('comments')
+        .populate({
+            path: 'author',
+            select: 'username'
+        })
+        .populate({
+            path: 'comments',
+            populate: { 
+                path: 'author',
+                model: 'User',
+                select: 'username'
+            }
+        })
         .exec((err, post) => {
             if(err) return next(err);
-
             // Success
             res.json(post);
         });
@@ -46,7 +55,6 @@ exports.post_create_post = (req, res, next) => {
         body: req.body.body,
         img_url: req.body.img_url
     });
-    console.log(post);
 
     if(!validatePost(post)){
         res.status(400);
@@ -65,18 +73,15 @@ exports.post_create_post = (req, res, next) => {
 }
 
 exports.post_add_comment = async (req, res, next) => {
-    console.log(req.params.id);
+
+    // Get the post from the id passed in the params
     var post = await Post.findById(req.params.id);
     
-    // success
-    console.log(post);
     // Save the comment
-    var comment = await save_comment(req, res, next).then((result) => { return result; });
-    console.log("comment saved");
-    console.log(comment);
-    console.log(post);
+    var comment = await save_comment(req, res, next); //.then((result) => { return result; });
+    
+    // Add the comment to the array;
     post.comments.push(comment._id);
-    console.log(post);
 
     post.save((err) => {
         if(err) return next(err);
