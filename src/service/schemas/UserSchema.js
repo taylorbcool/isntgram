@@ -1,12 +1,25 @@
 // UserSchema.js
 const mg = require('mongoose');
-const Schema = mg.Schema;
+
+const { Schema } = mg;
 var userModel = Schema({
-    username: String,
-    bio: String
+    username: {
+      type: String,
+      index: true,
+      unique: true,
+    },
+    password: String, 
+    salt: String,
+    profile: String,
+    email: {
+      type: String,
+      index: true,
+      unique: true,
+    },
+    roles: [String],
 });
 
-var User = mg.model('User', userModel);
+const User = mg.model('User', userModel);
 
 
 module.exports = { User };
