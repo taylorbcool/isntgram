@@ -1,40 +1,40 @@
 // UserRouter.js
+const express = require('express');
 const {
-    user_create_post,
-    user_get,
-    user_list
+  userCreatePost,
+  userGet,
+  userList,
 } = require('../controllers/UserController');
 
-const express = require('express');
 const UserRouter = express.Router();
 
 /**
  * @swagger
- * 
+ *
  * /user:
  *      get:
  *          responses:
  *              "200":
- *                  application/json:  
+ *                  application/json:
  */
-UserRouter.get('/', user_list);
+UserRouter.get('/', userList);
 
 /**
  * @swagger
- * 
+ *
  * /user/test:
  *      get:
  *          responses:
  *              "200":
  *                  application/json:
  */
-UserRouter.get('/test', async(req, res) => {
-    res.json({ message: 'User route is up!'});
-})
+UserRouter.get('/test', async (req, res) => {
+  res.json({ message: 'User route is up!' });
+});
 
 /**
  * @swagger
- * 
+ *
  * /user/{_id}:
  *      get:
  *          parameters:
@@ -48,7 +48,7 @@ UserRouter.get('/test', async(req, res) => {
  *              "200":
  *                  application/json:
  */
-UserRouter.get('/:id', user_get);
-UserRouter.post('/', user_create_post);
+UserRouter.get('/:id', userGet);
+UserRouter.post('/', userCreatePost);
 
 module.exports = UserRouter;
