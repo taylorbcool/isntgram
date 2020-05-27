@@ -1,53 +1,53 @@
 // UserController.js
-
-var { User } = require('../schemas/UserSchema');
+const bcrypt = require('bcrypt');
+const { User } = require('../schemas/UserSchema');
 
 const validateUser = (user) => {
-    if(!user.username) return false;
-    if(!user.bio) return false;
-    return true;
-}
-
-exports.user_list = (req, res, next) => {
-    console.log("user_list called");
-    User.find({}, 'username')
-        .exec((err, list_users) => {
-            if(err) return next(err);
-
-            // Success
-            res.json(list_users);
-        });
+  if (!user.username) return false;
+  if (!user.bio) return false;
+  return true;
 };
 
-exports.user_get = (req, res, next) => {
-    User.findById(req.params.id)
-        .exec((err, user) => {
-            if(err) next(err);
+exports.userList = (req, res, next) => {
+  console.log('user_list called');
+  User.find({}, 'username')
+    .exec((err, listUsers) => {
+      if (err) return next(err);
 
-            // success
-            res.json(user);
-        });
-}
-
-
-exports.user_create_post = (req, res, next) => {
-    var user = new User({
-        username: req.body.username,
-        bio: req.body.bio
+      // Success
+      return res.json(listUsers);
     });
-    console.log(user);
-    if(!validateUser(user)){
-        res.status(400);
-        res.json({
-            'message':'all required fields must be present'
-        });
+};
 
-        return res;
-    }
+exports.userGet = (req, res, next) => {
+  User.findById(req.params.id)
+    .exec((err, user) => {
+      if (err) next(err);
 
-    user.save((err) => {
-        if(err) return next(err);
+      // success
+      res.json(user);
+    });
+};
 
-        res.json(user);
-    }); 
-}
+
+exports.userCreatePost = (req, res, next) => {
+  const user = new User({
+    username: req.body.username,
+    bio: req.body.bio,
+  });
+  console.log(user);
+  if (!validateUser(user)) {
+    res.status(400);
+    res.json({
+      message: 'all required fields must be present',
+    });
+
+    return res;
+  }
+
+  return user.save((err) => {
+    if (err) return next(err);
+
+    return res.json(user);
+  });
+};
