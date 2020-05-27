@@ -3,8 +3,11 @@ const bcrypt = require('bcrypt');
 const { User } = require('../schemas/UserSchema');
 
 const validateUser = (user) => {
-  if (!user.username) return false;
-  if (!user.bio) return false;
+  if (
+    !user.username
+    || !user.password
+    || !user.email
+  ) return false;
   return true;
 };
 
@@ -30,11 +33,14 @@ exports.userGet = (req, res, next) => {
 };
 
 
-exports.userCreatePost = (req, res, next) => {
+exports.userCreate = (req, res, next) => {
   const user = new User({
     username: req.body.username,
     bio: req.body.bio,
+    password: req.body.password,
+    email: req.body.email,
   });
+
   console.log(user);
   if (!validateUser(user)) {
     res.status(400);
@@ -44,6 +50,12 @@ exports.userCreatePost = (req, res, next) => {
 
     return res;
   }
+
+  // Gen salt
+  user.salt = bcrypt.genSaltSync(10);
+
+  // Hash
+  user.password = bcrypt.hashSync(user.password, user.salt);
 
   return user.save((err) => {
     if (err) return next(err);
