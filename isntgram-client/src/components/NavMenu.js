@@ -46,7 +46,7 @@ function NavMenu() {
 
           <DrawerFooter>
             <Input placeholder="Find your interests" />
-            <Button>Search</Button>
+            <Button primary>Search</Button>
             {/* <Button>Cancel</Button> */}
           </DrawerFooter>
         </DrawerContent>

@@ -32,7 +32,7 @@ function App() {
 
   return (
     <ThemeProvider theme={customTheme}>
-        <CSSReset />
+      <CSSReset />
       <LoadingContext.Provider value={{isLoading, setIsLoading}} >
         <PostContext.Provider value={{posts, setPosts}}>
           <UserContext.Provider value={{user, setUser}} >

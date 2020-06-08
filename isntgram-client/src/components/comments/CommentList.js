@@ -5,7 +5,7 @@ import {
 import Comment from './Comment'
 
 const CommentList = props => {
-  return(
+  return (
       <Box
         maxWidth={400}
         p={4}
