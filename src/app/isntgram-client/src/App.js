@@ -12,6 +12,8 @@ import PostContext from "./contexts/PostContext";
 import LoadingContext from "./contexts/LoadingContext";
 import axiosWithAuth from "./auth/axiosWithAuth";
 import NavMenu from "./components/NavMenu";
+import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
   const [user, setUser] = useState({})
@@ -39,6 +41,8 @@ function App() {
             <NavMenu />
             <Switch>
               <Route exact path='/' component={PostList} />
+              <Route path='register' component={Register} />
+              <Route path='login' component={Login} />
               <Route path={`/account/${user.id}`} component={Dashboard} />
             </Switch>
           </UserContext.Provider>
