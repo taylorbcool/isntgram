@@ -1,7 +1,7 @@
 // UserRouter.js
 const express = require('express');
 const {
-  userCreatePost,
+  userCreate,
   userGet,
   userList,
 } = require('../controllers/UserController');
@@ -49,6 +49,6 @@ UserRouter.get('/test', async (req, res) => {
  *                  application/json:
  */
 UserRouter.get('/:id', userGet);
-UserRouter.post('/', userCreatePost);
+UserRouter.post('/', userCreate);
 
 module.exports = UserRouter;
