@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Drawer,
   DrawerBody,
@@ -9,12 +9,14 @@ import {
   DrawerCloseButton,
   Button,
   Input,
-  useDisclosure
+  useDisclosure,
+  Link
 } from "@chakra-ui/core";
 
 function NavMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const [user, setUser] = useState({})
 
   return (
     <>
@@ -34,6 +36,11 @@ function NavMenu() {
 
           <DrawerBody>
             <Input placeholder="Type here..." />
+            <Link to={`/account/${user.id}`}>
+              <Button variant="outline">
+                My Account
+              </Button>
+            </Link>
           </DrawerBody>
 
           <DrawerFooter>
